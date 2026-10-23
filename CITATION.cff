@@ -6,13 +6,13 @@ authors:
   - family-names: "Ngueabou"
     given-names: "Yolande Vanelle"
     email: "yolande@aims.edu.gh"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    # orcid: "https://orcid.org/0000-0001-9718-0893"
   - family-names: "Oloniiju"
     given-names: "Shina Daniel"
     email: "s.oloniiju@ru.ac.za"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    # orcid: "https://orcid.org/0000-0002-9794-8580"
 version: "1.0"
-date-released: "2026-10-22"   # change to the release date
+date-released: "2026-10-23"   # change to the release date
 license: MIT
 repository-code: "https://github.com/YOUR-USERNAME/schnakenberg-pinn-fft-vs-ad"
 # doi: "10.5281/zenodo.XXXXXXX"   # add after Zenodo mints it
