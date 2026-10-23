@@ -23,12 +23,12 @@
 #
 #  USAGE
 #  -----
-#    python schnakenberg_v16_spectral_squarev6.py              # all 9
-#    python schnakenberg_v16_spectral_squarev6.py --regime K_stripes
-#    python schnakenberg_v16_spectral_squarev6.py --quick
-#    python schnakenberg_v16_spectral_squarev6.py --list-regimes
-#    python schnakenberg_v16_spectral_squarev6.py --no-early-stop
-#    python schnakenberg_v16_spectral_squarev6.py --save-dir ./results
+#    python schnakenberg_v16_spectral_v10.py              # all 9
+#    python schnakenberg_v16_spectral_v10.py --regime K_stripes
+#    python schnakenberg_v16_spectral_v10.py --quick
+#    python schnakenberg_v16_spectral_v10.py --list-regimes
+#    python schnakenberg_v16_spectral_v10.py --no-early-stop
+#    python schnakenberg_v16_spectral_v10.py --save-dir ./results
 # =============================================================================
 
 import os, time, argparse, warnings, json
