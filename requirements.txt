@@ -1,0 +1,6 @@
+# Versions of the Kaggle session that produced the results
+# (Python 3.12.13, Linux, 2x NVIDIA Tesla T4, CUDA 12.5.1 / cuDNN 9)
+tensorflow==2.20.0
+keras==3.13.2
+numpy==2.0.2
+matplotlib==3.10.0
