@@ -1,0 +1,826 @@
+Loaded 84 total metrics files.
+
+====================================================================================================
+
+====================================================================================================
+REGIME: K_Hpi  METHOD: autograd  DOMAIN: hex_rect  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.220976475563766, 45: 19.220976475563766, 49: 19.220976475563766, 52: 19.220976475563766}
+  k_star_formula     {42: 20.775156867209038, 45: 20.775156867209038, 49: 20.775156867209038, 52: 20.775156867209038}
+  sigma_max          {42: 1.2303703083606194, 45: 1.2303703083606194, 49: 1.2303703083606194, 52: 1.2303703083606194}
+  n_mode             {42: 6, 45: 6, 49: 6, 52: 6}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.9613525822169122, 45: 1.9613525822169122, 49: 1.9613525822169122, 52: 1.9613525822169122}
+  Ly                 {42: 1.1323874413187018, 45: 1.1323874413187018, 49: 1.1323874413187018, 52: 1.1323874413187018}
+  L                  {42: 1.9613525822169122, 45: 1.9613525822169122, 49: 1.9613525822169122, 52: 1.9613525822169122}
+  domain             {42: 'hex_rect', 45: 'hex_rect', 49: 'hex_rect', 52: 'hex_rect'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=10  std=0  by_seed={42: 10.0, 45: 10.0, 49: 10.0, 52: 10.0}
+  spec_err_vs_kformula mean=1.771  std=0  by_seed={42: 1.7709, 45: 1.7709, 49: 1.7709, 52: 1.7709}
+  u_amp              mean=4.312  std=1.946  by_seed={42: 5.5907, 45: 5.3322, 49: 1.4241, 52: 4.9005}
+  v_min              mean=0.1958  std=0.0461  by_seed={42: 0.1588, 45: 0.175, 49: 0.2628, 52: 0.1864}
+  lpde_floor         mean=1.55e-09  std=9.462e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=7.9e-08  std=8.096e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=3000  std=0  by_seed={42: 3000, 45: 3000, 49: 3000, 52: 3000}
+  wall_time_s        mean=2.707e+04  std=893  by_seed={42: 26555.1374, 45: 26798.8782, 49: 28393.6145, 52: 26520.5023}
+  ms_per_window      mean=9001  std=296.8  by_seed={42: 8830.0276, 45: 8912.1783, 49: 9441.249, 52: 8818.583}
+  anisotropy         mean=0.08893  std=0.03729  by_seed={42: 0.1335, 45: 0.0643, 49: 0.0527, 52: 0.1053}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'triad', 45: 'triad', 49: 'triad', 52: 'triad'}
+
+Source files:
+  seed=42: /kaggle/working/results/khpi_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/khpi_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/khpi_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/khpi_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_Hpi  METHOD: spectral_FFT  DOMAIN: hex_rect  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.220976475563766, 45: 19.220976475563766, 49: 19.220976475563766, 52: 19.220976475563766}
+  k_star_formula     {42: 20.775156867209038, 45: 20.775156867209038, 49: 20.775156867209038, 52: 20.775156867209038}
+  sigma_max          {42: 1.2303703083606194, 45: 1.2303703083606194, 49: 1.2303703083606194, 52: 1.2303703083606194}
+  n_mode             {42: 6, 45: 6, 49: 6, 52: 6}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.9613525822169122, 45: 1.9613525822169122, 49: 1.9613525822169122, 52: 1.9613525822169122}
+  Ly                 {42: 1.1323874413187018, 45: 1.1323874413187018, 49: 1.1323874413187018, 52: 1.1323874413187018}
+  L                  {42: 1.9613525822169122, 45: 1.9613525822169122, 49: 1.9613525822169122, 52: 1.9613525822169122}
+  domain             {42: 'hex_rect', 45: 'hex_rect', 49: 'hex_rect', 52: 'hex_rect'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=10  std=0  by_seed={42: 10.0, 45: 10.0, 49: 10.0, 52: 10.0}
+  spec_err_vs_kformula mean=1.771  std=0  by_seed={42: 1.7709, 45: 1.7709, 49: 1.7709, 52: 1.7709}
+  u_amp              mean=4.731  std=0.1979  by_seed={42: 4.6046, 45: 4.8988, 49: 4.5203, 52: 4.9013}
+  v_min              mean=0.1811  std=0.01424  by_seed={42: 0.1902, 45: 0.1623, 49: 0.1938, 52: 0.178}
+  lpde_floor         mean=1.844e-09  std=2.734e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=2.835e-08  std=1.256e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=3000  std=0  by_seed={42: 3000, 45: 3000, 49: 3000, 52: 3000}
+  wall_time_s        mean=2988  std=12.16  by_seed={42: 2989.2945, 45: 2983.9654, 49: 3003.1856, 52: 2974.0219}
+  ms_per_window      mean=974.8  std=4.024  by_seed={42: 975.1034, 45: 973.6436, 49: 980.049, 52: 970.374}
+  anisotropy         mean=0.4137  std=0.3579  by_seed={42: 0.267, 45: 0.1737, 49: 0.2677, 52: 0.9464}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'mixed/labyrinthine', 49: 'mixed/labyrinthine', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'triad', 45: 'triad', 49: 'triad', 52: 'triad'}
+
+Source files:
+  seed=42: /kaggle/working/results/khpi_hexrect/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/khpi_hexrect/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/khpi_hexrect/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/khpi_hexrect/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_Hpi  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.220976475563766, 45: 19.220976475563766, 49: 19.220976475563766, 52: 19.220976475563766}
+  k_star_formula     {42: 20.775156867209038, 45: 20.775156867209038, 49: 20.775156867209038, 52: 20.775156867209038}
+  sigma_max          {42: 1.2303703083606194, 45: 1.2303703083606194, 49: 1.2303703083606194, 52: 1.2303703083606194}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.63446048518076, 45: 1.63446048518076, 49: 1.63446048518076, 52: 1.63446048518076}
+  Ly                 {42: 1.63446048518076, 45: 1.63446048518076, 49: 1.63446048518076, 52: 1.63446048518076}
+  L                  {42: 1.63446048518076, 45: 1.63446048518076, 49: 1.63446048518076, 52: 1.63446048518076}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=10.31  std=0  by_seed={42: 10.3087, 45: 10.3087, 49: 10.3087, 52: 10.3087}
+  spec_err_vs_kformula mean=2.057  std=0  by_seed={42: 2.0565, 45: 2.0565, 49: 2.0565, 52: 2.0565}
+  u_amp              mean=5.226  std=0.5362  by_seed={42: 5.6132, 45: 4.4701, 49: 5.6019, 52: 5.2196}
+  v_min              mean=0.1766  std=0.0142  by_seed={42: 0.1641, 45: 0.1956, 49: 0.1675, 52: 0.1793}
+  lpde_floor         mean=1.794e-09  std=4.105e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=3.335e-08  std=8.763e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=3000  std=0  by_seed={42: 3000, 45: 3000, 49: 3000, 52: 3000}
+  wall_time_s        mean=3035  std=3.075  by_seed={42: 3034.8702, 45: 3036.5325, 49: 3030.8775, 52: 3038.0059}
+  ms_per_window      mean=984.7  std=0.9496  by_seed={42: 984.7232, 45: 985.1507, 49: 983.3452, 52: 985.5167}
+  anisotropy         mean=0.5267  std=0.1269  by_seed={42: 0.4173, 45: 0.6657, 49: 0.4209, 52: 0.6028}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'stripes', 49: 'mixed/labyrinthine', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/khpi_square/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/khpi_square/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/khpi_square/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/khpi_square/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_mixed  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.179361508840064, 45: 19.179361508840064, 49: 19.179361508840064, 52: 19.179361508840064}
+  k_star_formula     {42: 20.602531051166643, 45: 20.602531051166643, 49: 20.602531051166643, 52: 20.602531051166643}
+  sigma_max          {42: 1.121975531047127, 45: 1.121975531047127, 49: 1.121975531047127, 52: 1.121975531047127}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  Ly                 {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  L                  {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=9.397  std=1.823  by_seed={42: 10.3087, 45: 10.3087, 49: 10.3087, 52: 6.6619}
+  spec_err_vs_kformula mean=5.294  std=5.21  by_seed={42: 2.6888, 45: 2.6888, 49: 2.6888, 52: 13.1095}
+  u_amp              mean=3.551  std=2.281  by_seed={42: 5.2482, 45: 4.343, 49: 0.185, 52: 4.4278}
+  v_min              mean=0.2136  std=0.04487  by_seed={42: 0.1769, 45: 0.1968, 49: 0.2789, 52: 0.2017}
+  lpde_floor         mean=1.335e-09  std=8.692e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=6.315e-08  std=5.948e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=4000  std=0  by_seed={42: 4000, 45: 4000, 49: 4000, 52: 4000}
+  wall_time_s        mean=3.543e+04  std=490.7  by_seed={42: 35642.0948, 45: 35907.1713, 49: 34759.6997, 52: 35413.4258}
+  ms_per_window      mean=8833  std=121.4  by_seed={42: 8886.6639, 45: 8949.1776, 49: 8666.3114, 52: 8828.474}
+  anisotropy         mean=0.6638  std=0.2096  by_seed={42: 0.6287, 45: 0.6152, 49: 0.4561, 52: 0.9554}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'stripes', 45: 'stripes', 49: 'mixed/labyrinthine', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/kmixed_B/autograd_d2_all_metrics_s42 (1).json
+  seed=45: /kaggle/working/results/kmixed_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/kmixed_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/kmixed_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_mixed  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.179361508840064, 45: 19.179361508840064, 49: 19.179361508840064, 52: 19.179361508840064}
+  k_star_formula     {42: 20.602531051166643, 45: 20.602531051166643, 49: 20.602531051166643, 52: 20.602531051166643}
+  sigma_max          {42: 1.121975531047127, 45: 1.121975531047127, 49: 1.121975531047127, 52: 1.121975531047127}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  Ly                 {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  L                  {42: 1.638006902441348, 45: 1.638006902441348, 49: 1.638006902441348, 52: 1.638006902441348}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=9.397  std=1.823  by_seed={42: 10.3087, 45: 10.3087, 49: 10.3087, 52: 6.6619}
+  spec_err_vs_kformula mean=5.294  std=5.21  by_seed={42: 2.6888, 45: 2.6888, 49: 2.6888, 52: 13.1095}
+  u_amp              mean=4.922  std=0.5516  by_seed={42: 5.4158, 45: 4.4296, 49: 5.3834, 52: 4.4599}
+  v_min              mean=0.1817  std=0.01508  by_seed={42: 0.1706, 45: 0.1953, 49: 0.1669, 52: 0.194}
+  lpde_floor         mean=1.575e-09  std=6.443e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=2.367e-08  std=1.628e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=4000  std=0  by_seed={42: 4000, 45: 4000, 49: 4000, 52: 4000}
+  wall_time_s        mean=4057  std=61.93  by_seed={42: 4014.0043, 45: 4026.9399, 49: 4037.6886, 52: 4148.5529}
+  ms_per_window      mean=990.2  std=14.81  by_seed={42: 979.735, 45: 983.1554, 49: 985.8148, 52: 1012.0949}
+  anisotropy         mean=0.6523  std=0.1449  by_seed={42: 0.5423, 45: 0.6635, 49: 0.5503, 52: 0.8532}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'stripes', 49: 'mixed/labyrinthine', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/kmixed_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/kmixed_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/kmixed_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/kmixed_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_stripes  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.01175219552782, 45: 19.01175219552782, 49: 19.01175219552782, 52: 19.01175219552782}
+  k_star_formula     {42: 19.12473674473862, 45: 19.12473674473862, 49: 19.12473674473862, 52: 19.12473674473862}
+  sigma_max          {42: 0.08554321450120028, 45: 0.08554321450120028, 49: 0.08554321450120028, 52: 0.08554321450120028}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  Ly                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  L                  {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=6.662  std=0  by_seed={42: 6.6619, 45: 6.6619, 49: 6.6619, 52: 6.6619}
+  spec_err_vs_kformula mean=7.213  std=0  by_seed={42: 7.2133, 45: 7.2133, 49: 7.2133, 52: 7.2133}
+  u_amp              mean=1.791  std=0.05755  by_seed={42: 1.8066, 45: 1.8498, 49: 1.7947, 52: 1.7121}
+  v_min              mean=0.2258  std=0.001816  by_seed={42: 0.2262, 45: 0.2231, 49: 0.2263, 52: 0.2273}
+  lpde_floor         mean=5.343e-10  std=1.861e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=8.807e-09  std=7.893e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=4000  std=0  by_seed={42: 4000, 45: 4000, 49: 4000, 52: 4000}
+  wall_time_s        mean=3.586e+04  std=1091  by_seed={42: 34937.7213, 45: 37390.5958, 49: 35858.1243, 52: 35245.8265}
+  ms_per_window      mean=8939  std=270.4  by_seed={42: 8711.3164, 45: 9319.1786, 49: 8939.1008, 52: 8787.5309}
+  anisotropy         mean=0.2785  std=0.2124  by_seed={42: 0.1196, 45: 0.2821, 49: 0.1348, 52: 0.5776}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'mixed/labyrinthine', 49: 'spots', 52: 'mixed/labyrinthine'}
+  es_triggered       by_seed={42: True, 45: True, 49: True, 52: True}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/kstripes_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/kstripes_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/kstripes_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/kstripes_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_stripes  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: False  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.01175219552782, 45: 19.01175219552782, 49: 19.01175219552782, 52: 19.01175219552782}
+  k_star_formula     {42: 19.12473674473862, 45: 19.12473674473862, 49: 19.12473674473862, 52: 19.12473674473862}
+  sigma_max          {42: 0.08554321450120028, 45: 0.08554321450120028, 49: 0.08554321450120028, 52: 0.08554321450120028}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  Ly                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  L                  {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: False, 45: False, 49: False, 52: False}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=27.88  std=32.12  by_seed={42: 23.6325, 45: 74.5442, 49: 6.6619, 52: 6.6619}
+  spec_err_vs_kformula mean=28.3  std=31.93  by_seed={42: 24.0836, 45: 74.6945, 49: 7.2133, 52: 7.2133}
+  u_amp              mean=0.7875  std=0.9159  by_seed={42: 0.0012, 45: 0.0007, 49: 1.7185, 52: 1.4297}
+  v_min              mean=0.2444  std=0.01629  by_seed={42: 0.2585, 45: 0.2585, 49: 0.2286, 52: 0.232}
+  lpde_floor         mean=9.73e-11  std=9.583e-12  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=8.235e-09  std=7.699e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=4719  std=2615  by_seed={42: 2683, 45: 2337, 49: 7610, 52: 6246}
+  wall_time_s        mean=4851  std=2666  by_seed={42: 2782.4107, 45: 2421.9668, 49: 7817.571, 52: 6380.8028}
+  ms_per_window      mean=1006  std=4.118  by_seed={42: 1009.3085, 45: 1007.3037, 49: 1006.2253, 52: 999.7826}
+  anisotropy         mean=0.4768  std=0.4237  by_seed={42: 0.2506, 45: 0.6661, 49: 0.0205, 52: 0.9701}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'stripes', 49: 'spots', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: True, 52: True}
+  collapsed          by_seed={42: True, 45: True, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/kstripes_A_staboff/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/kstripes_A_staboff/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/kstripes_A_staboff/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/kstripes_A_staboff/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: K_stripes  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 19.01175219552782, 45: 19.01175219552782, 49: 19.01175219552782, 52: 19.01175219552782}
+  k_star_formula     {42: 19.12473674473862, 45: 19.12473674473862, 49: 19.12473674473862, 52: 19.12473674473862}
+  sigma_max          {42: 0.08554321450120028, 45: 0.08554321450120028, 49: 0.08554321450120028, 52: 0.08554321450120028}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 96, 45: 96, 49: 96, 52: 96}
+  Lx                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  Ly                 {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  L                  {42: 1.6524477182743826, 45: 1.6524477182743826, 49: 1.6524477182743826, 52: 1.6524477182743826}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=7.574  std=1.823  by_seed={42: 10.3087, 45: 6.6619, 49: 6.6619, 52: 6.6619}
+  spec_err_vs_kformula mean=7.824  std=1.222  by_seed={42: 9.657, 45: 7.2133, 49: 7.2133, 52: 7.2133}
+  u_amp              mean=1.785  std=0.08085  by_seed={42: 1.8363, 45: 1.8312, 49: 1.8067, 52: 1.6651}
+  v_min              mean=0.2267  std=0.001528  by_seed={42: 0.2252, 45: 0.2267, 49: 0.2261, 52: 0.2288}
+  lpde_floor         mean=6.755e-10  std=8.959e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=6.474e-09  std=3.667e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=4000  std=0  by_seed={42: 4000, 45: 4000, 49: 4000, 52: 4000}
+  wall_time_s        mean=3932  std=41.03  by_seed={42: 3908.1169, 45: 3894.993, 49: 3935.3848, 52: 3987.6698}
+  ms_per_window      mean=959.9  std=10.21  by_seed={42: 953.8884, 45: 950.8815, 49: 960.9109, 52: 973.8459}
+  anisotropy         mean=0.284  std=0.3707  by_seed={42: 0.1916, 45: 0.0553, 49: 0.0573, 52: 0.8317}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'spots', 49: 'spots', 52: 'stripes'}
+  es_triggered       by_seed={42: True, 45: True, 49: True, 52: True}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/kstripes_A_stabon/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/kstripes_A_stabon/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/kstripes_A_stabon/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/kstripes_A_stabon/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: M_spots  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 17.30197209514977, 45: 17.30197209514977, 49: 17.30197209514977, 52: 17.30197209514977}
+  k_star_formula     {42: 21.908902300206645, 45: 21.908902300206645, 49: 21.908902300206645, 52: 21.908902300206645}
+  sigma_max          {42: 7.08529946442809, 45: 7.08529946442809, 49: 7.08529946442809, 52: 7.08529946442809}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  Ly                 {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  L                  {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=6.569  std=1.823  by_seed={42: 7.4802, 45: 7.4802, 49: 7.4802, 52: 3.8335}
+  spec_err_vs_kformula mean=17.35  std=4.467  by_seed={42: 15.1204, 45: 15.1204, 49: 15.1204, 52: 24.0551}
+  u_amp              mean=3.658  std=0.1032  by_seed={42: 3.7299, 45: 3.7403, 49: 3.6436, 52: 3.5173}
+  v_min              mean=0.2881  std=0.002301  by_seed={42: 0.2902, 45: 0.29, 49: 0.2856, 52: 0.2868}
+  lpde_floor         mean=1.528e-07  std=4.769e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=3.787e-07  std=1.414e-07  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=167  std=0  by_seed={42: 167, 45: 167, 49: 167, 52: 167}
+  wall_time_s        mean=770  std=0.6923  by_seed={42: 769.9943, 45: 770.4573, 49: 769.0214, 52: 770.5207}
+  ms_per_window      mean=4439  std=4.52  by_seed={42: 4439.9554, 45: 4442.4375, 49: 4432.4569, 52: 4441.3993}
+  anisotropy         mean=0.01601  std=0.0185  by_seed={42: 0.015, 45: 0.0048, 49: 0.0018, 52: 0.0424}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/M_spots_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/M_spots_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/M_spots_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/M_spots_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: M_spots  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 17.30197209514977, 45: 17.30197209514977, 49: 17.30197209514977, 52: 17.30197209514977}
+  k_star_formula     {42: 21.908902300206645, 45: 21.908902300206645, 49: 21.908902300206645, 52: 21.908902300206645}
+  sigma_max          {42: 7.08529946442809, 45: 7.08529946442809, 49: 7.08529946442809, 52: 7.08529946442809}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  Ly                 {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  L                  {42: 1.8157425271021388, 45: 1.8157425271021388, 49: 1.8157425271021388, 52: 1.8157425271021388}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=7.48  std=0  by_seed={42: 7.4802, 45: 7.4802, 49: 7.4802, 52: 7.4802}
+  spec_err_vs_kformula mean=15.12  std=0  by_seed={42: 15.1204, 45: 15.1204, 49: 15.1204, 52: 15.1204}
+  u_amp              mean=3.711  std=0.02169  by_seed={42: 3.734, 45: 3.714, 49: 3.6818, 52: 3.7152}
+  v_min              mean=0.2867  std=0.001221  by_seed={42: 0.2872, 45: 0.285, 49: 0.2879, 52: 0.2866}
+  lpde_floor         mean=1.494e-07  std=2.451e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=7.439e-07  std=4.039e-07  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=167  std=0  by_seed={42: 167, 45: 167, 49: 167, 52: 167}
+  wall_time_s        mean=169.6  std=1.323  by_seed={42: 168.2493, 45: 171.3528, 49: 169.69, 52: 169.0128}
+  ms_per_window      mean=841.5  std=7.413  by_seed={42: 835.6038, 45: 852.1947, 49: 837.6519, 52: 840.541}
+  anisotropy         mean=0.01381  std=0.006871  by_seed={42: 0.0072, 45: 0.0194, 49: 0.0086, 52: 0.0201}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/M_spots_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/M_spots_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/M_spots_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/M_spots_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: S_spots  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 11.92081979178654, 45: 11.92081979178654, 49: 11.92081979178654, 52: 11.92081979178654}
+  k_star_formula     {42: 15.0, 45: 15.0, 49: 15.0, 52: 15.0}
+  sigma_max          {42: 7.894736841969518, 45: 7.894736841969518, 49: 7.894736841969518, 52: 7.894736841969518}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  Ly                 {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  L                  {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=6.569  std=1.823  by_seed={42: 7.4802, 45: 3.8335, 49: 7.4802, 52: 7.4802}
+  spec_err_vs_kformula mean=16.83  std=4.496  by_seed={42: 14.5832, 45: 23.5744, 49: 14.5832, 52: 14.5832}
+  u_amp              mean=2.822  std=0.01729  by_seed={42: 2.8056, 45: 2.83, 49: 2.8419, 52: 2.8091}
+  v_min              mean=0.3801  std=0.002449  by_seed={42: 0.3813, 45: 0.3801, 49: 0.3822, 52: 0.3766}
+  lpde_floor         mean=1.378e-07  std=2.848e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=1.991e-07  std=3.602e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=167  std=0  by_seed={42: 167, 45: 167, 49: 167, 52: 167}
+  wall_time_s        mean=771.1  std=1.194  by_seed={42: 772.7118, 45: 771.2082, 49: 769.9495, 52: 770.5124}
+  ms_per_window      mean=4444  std=5.83  by_seed={42: 4448.4369, 45: 4448.957, 49: 4437.6092, 52: 4439.8526}
+  anisotropy         mean=0.01707  std=0.01155  by_seed={42: 0.0115, 45: 0.0178, 49: 0.0061, 52: 0.0328}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/S_spots_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/S_spots_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/S_spots_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/S_spots_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: S_spots  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 11.92081979178654, 45: 11.92081979178654, 49: 11.92081979178654, 52: 11.92081979178654}
+  k_star_formula     {42: 15.0, 45: 15.0, 49: 15.0, 52: 15.0}
+  sigma_max          {42: 7.894736841969518, 45: 7.894736841969518, 49: 7.894736841969518, 52: 7.894736841969518}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  Ly                 {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  L                  {42: 2.6353830596066508, 45: 2.6353830596066508, 49: 2.6353830596066508, 52: 2.6353830596066508}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=6.569  std=1.823  by_seed={42: 7.4802, 45: 7.4802, 49: 3.8335, 52: 7.4802}
+  spec_err_vs_kformula mean=16.83  std=4.496  by_seed={42: 14.5832, 45: 14.5832, 49: 23.5744, 52: 14.5832}
+  u_amp              mean=2.805  std=0.008159  by_seed={42: 2.8003, 45: 2.8064, 49: 2.8159, 52: 2.7974}
+  v_min              mean=0.3803  std=0.00208  by_seed={42: 0.3791, 45: 0.378, 49: 0.3818, 52: 0.3822}
+  lpde_floor         mean=1.403e-07  std=1.755e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=2.453e-07  std=6.733e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=167  std=0  by_seed={42: 167, 45: 167, 49: 167, 52: 167}
+  wall_time_s        mean=168.5  std=4.874  by_seed={42: 166.9539, 45: 166.1466, 49: 165.1744, 52: 175.73}
+  ms_per_window      mean=837.9  std=27.2  by_seed={42: 827.0296, 45: 824.9197, 49: 821.1127, 52: 878.5344}
+  anisotropy         mean=0.01381  std=0.007763  by_seed={42: 0.0063, 45: 0.0243, 49: 0.0102, 52: 0.0145}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/S_spots_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/S_spots_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/S_spots_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/S_spots_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: T_spots  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 21.199592002628087, 45: 21.199592002628087, 49: 21.199592002628087, 52: 21.199592002628087}
+  k_star_formula     {42: 21.90890230020664, 45: 21.90890230020664, 49: 21.90890230020664, 52: 21.90890230020664}
+  sigma_max          {42: 0.48551695702789743, 45: 0.48551695702789743, 49: 0.48551695702789743, 52: 0.48551695702789743}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  Ly                 {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  L                  {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=83.03  std=0  by_seed={42: 83.0294, 45: 83.0294, 49: 83.0294, 52: 83.0294}
+  spec_err_vs_kformula mean=83.58  std=0  by_seed={42: 83.5789, 45: 83.5789, 49: 83.5789, 52: 83.5789}
+  u_amp              mean=68.87  std=34.33  by_seed={42: 20.4475, 45: 68.9929, 49: 96.4814, 52: 89.5462}
+  v_min              mean=-0.1165  std=0.3433  by_seed={42: 0.0357, 45: 0.1469, 49: -0.6198, 52: -0.0289}
+  lpde_floor         mean=7.318e-09  std=1.504e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=778.8  std=1551  by_seed={42: 0.0, 45: 0.0002, 49: 3106.0466, 52: 9.2277}
+  n_windows          mean=499.8  std=348.1  by_seed={42: 800, 45: 800, 49: 238, 52: 161}
+  wall_time_s        mean=2300  std=1578  by_seed={42: 3668.0181, 45: 3655.3792, 49: 1112.4306, 52: 765.6452}
+  ms_per_window      mean=4519  std=9.062  by_seed={42: 4526.5896, 45: 4512.3312, 49: 4509.9691, 52: 4526.9223}
+  anisotropy         mean=0.1704  std=0.1748  by_seed={42: 0.3779, 45: 0.0194, 49: 0.2524, 52: 0.032}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'mixed/labyrinthine', 45: 'spots', 49: 'mixed/labyrinthine', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/T_spots_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/T_spots_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/T_spots_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/T_spots_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: T_spots  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 21.199592002628087, 45: 21.199592002628087, 49: 21.199592002628087, 52: 21.199592002628087}
+  k_star_formula     {42: 21.90890230020664, 45: 21.90890230020664, 49: 21.90890230020664, 52: 21.90890230020664}
+  sigma_max          {42: 0.48551695702789743, 45: 0.48551695702789743, 49: 0.48551695702789743, 52: 0.48551695702789743}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  Ly                 {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  L                  {42: 1.48191184679419, 45: 1.48191184679419, 49: 1.48191184679419, 52: 1.48191184679419}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=12.32  std=5.657  by_seed={42: 15.1472, 45: 15.1472, 49: 15.1472, 52: 3.8335}
+  spec_err_vs_kformula mean=15.16  std=5.474  by_seed={42: 17.8943, 45: 17.8943, 49: 17.8943, 52: 6.9469}
+  u_amp              mean=5.042  std=0.2196  by_seed={42: 4.74, 45: 5.2077, 49: 5.0189, 52: 5.2019}
+  v_min              mean=0.2007  std=0.000531  by_seed={42: 0.2011, 45: 0.2012, 49: 0.2003, 52: 0.2002}
+  lpde_floor         mean=6.555e-09  std=7.753e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=8.539e-08  std=8.263e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=800  std=0  by_seed={42: 800, 45: 800, 49: 800, 52: 800}
+  wall_time_s        mean=878.7  std=24.06  by_seed={42: 896.4271, 45: 847.0606, 49: 898.4232, 52: 872.9941}
+  ms_per_window      mean=1040  std=29.84  by_seed={42: 1063.4624, 45: 1001.0346, 49: 1063.4597, 52: 1032.8154}
+  anisotropy         mean=0.0121  std=0.008171  by_seed={42: 0.0121, 45: 0.0033, 49: 0.023, 52: 0.01}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/T_spots_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/T_spots_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/T_spots_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/T_spots_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: low_rho  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 18.583208480850864, 45: 18.583208480850864, 49: 18.583208480850864, 52: 18.583208480850864}
+  k_star_formula     {42: 24.341322889276164, 45: 24.341322889276164, 49: 24.341322889276164, 52: 24.341322889276164}
+  sigma_max          {42: 0.9869825847590334, 45: 0.9869825847590334, 49: 0.9869825847590334, 52: 0.9869825847590334}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  Ly                 {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  L                  {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=63.23  std=26.73  by_seed={42: 26.4609, 45: 83.0294, 49: 83.0294, 52: 60.402}
+  spec_err_vs_kformula mean=71.93  std=20.41  by_seed={42: 43.8571, 45: 87.0439, 49: 87.0439, 52: 69.7692}
+  u_amp              mean=92.87  std=11.71  by_seed={42: 75.3502, 45: 98.5799, 49: 97.7775, 52: 99.7689}
+  v_min              mean=0.1336  std=0.2523  by_seed={42: -0.1961, 45: 0.4091, 49: 0.2099, 52: 0.1116}
+  lpde_floor         mean=3.972e-10  std=8.25e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=17.65  std=22.43  by_seed={42: 48.9271, 45: 18.8371, 49: 0.232, 52: 2.6177}
+  n_windows          mean=698  std=96.84  by_seed={42: 815, 45: 614, 49: 623, 52: 740}
+  wall_time_s        mean=3206  std=444.9  by_seed={42: 3755.9997, 45: 2827.0167, 49: 2863.1501, 52: 3379.4679}
+  ms_per_window      mean=4525  std=18.97  by_seed={42: 4547.3752, 45: 4528.1994, 49: 4521.3722, 52: 4501.4097}
+  anisotropy         mean=0.01157  std=0.008836  by_seed={42: 0.022, 45: 0.0013, 49: 0.0147, 52: 0.0083}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/low_rho_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/low_rho_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/low_rho_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/low_rho_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: low_rho  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 18.583208480850864, 45: 18.583208480850864, 49: 18.583208480850864, 52: 18.583208480850864}
+  k_star_formula     {42: 24.341322889276164, 45: 24.341322889276164, 49: 24.341322889276164, 52: 24.341322889276164}
+  sigma_max          {42: 0.9869825847590334, 45: 0.9869825847590334, 49: 0.9869825847590334, 52: 0.9869825847590334}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  Ly                 {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  L                  {42: 1.690554489999431, 45: 1.690554489999431, 49: 1.690554489999431, 52: 1.690554489999431}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=15.15  std=9.238  by_seed={42: 26.4609, 45: 15.1472, 49: 3.8335, 52: 15.1472}
+  spec_err_vs_kformula mean=35.22  std=7.052  by_seed={42: 43.8571, 45: 35.2197, 49: 26.5824, 52: 35.2197}
+  u_amp              mean=13.93  std=0.6926  by_seed={42: 13.0624, 45: 14.1783, 49: 14.7035, 52: 13.7675}
+  v_min              mean=0.09008  std=0.004696  by_seed={42: 0.0931, 45: 0.0852, 49: 0.095, 52: 0.0871}
+  lpde_floor         mean=3.989e-10  std=1.051e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=9.622e-08  std=3.348e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=1612  std=275.2  by_seed={42: 2000, 45: 1350, 49: 1547, 52: 1550}
+  wall_time_s        mean=1621  std=289.7  by_seed={42: 2032.7912, 45: 1360.3677, 49: 1585.0388, 52: 1507.134}
+  ms_per_window      mean=966.5  std=23.56  by_seed={42: 981.2664, 45: 965.6571, 49: 985.6265, 52: 933.6194}
+  anisotropy         mean=0.02422  std=0.0191  by_seed={42: 0.0247, 45: 0.0511, 49: 0.0109, 52: 0.0102}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: True, 49: True, 52: True}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/low_rho_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/low_rho_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/low_rho_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/low_rho_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: min_rho  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 18.348351869148313, 45: 18.348351869148313, 49: 18.348351869148313, 52: 18.348351869148313}
+  k_star_formula     {42: 19.170289512680824, 45: 19.170289512680824, 49: 19.170289512680824, 52: 19.170289512680824}
+  sigma_max          {42: 0.12312151499398283, 45: 0.12312151499398283, 49: 0.12312151499398283, 52: 0.12312151499398283}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  Ly                 {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  L                  {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=27.37  std=31.18  by_seed={42: 7.4802, 45: 71.7157, 49: 3.8335, 52: 26.4609}
+  spec_err_vs_kformula mean=28.34  std=31.91  by_seed={42: 2.872, 45: 72.9284, 49: 7.9567, 52: 29.6139}
+  u_amp              mean=58.64  std=28.12  by_seed={42: 68.4887, 45: 93.8478, 49: 39.3491, 52: 32.8719}
+  v_min              mean=0.06823  std=0.6695  by_seed={42: -0.8776, 45: 0.065, 49: 0.5434, 52: 0.542}
+  lpde_floor         mean=8.975e-11  std=2.657e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=2.258  std=3.056  by_seed={42: 0.9325, 45: 6.8123, 49: 1.0303, 52: 0.2564}
+  n_windows          mean=1500  std=140.5  by_seed={42: 1616, 45: 1322, 49: 1609, 52: 1453}
+  wall_time_s        mean=6664  std=622.2  by_seed={42: 7260.6343, 45: 5971.0486, 49: 7113.415, 52: 6312.7363}
+  ms_per_window      mean=4402  std=75.72  by_seed={42: 4451.7571, 45: 4471.0112, 49: 4380.7035, 52: 4304.4823}
+  anisotropy         mean=0.009521  std=0.008808  by_seed={42: 0.0054, 45: 0.0224, 49: 0.0028, 52: 0.0074}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/min_rho_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/min_rho_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/min_rho_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/min_rho_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: min_rho  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 18.348351869148313, 45: 18.348351869148313, 49: 18.348351869148313, 52: 18.348351869148313}
+  k_star_formula     {42: 19.170289512680824, 45: 19.170289512680824, 49: 19.170289512680824, 52: 19.170289512680824}
+  sigma_max          {42: 0.12312151499398283, 45: 0.12312151499398283, 49: 0.12312151499398283, 52: 0.12312151499398283}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  Ly                 {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  L                  {42: 1.712193376273865, 45: 1.712193376273865, 49: 1.712193376273865, 52: 1.712193376273865}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=29.29  std=10.83  by_seed={42: 37.7746, 45: 15.1472, 49: 37.7746, 52: 26.4609}
+  spec_err_vs_kformula mean=32.32  std=10.37  by_seed={42: 40.4426, 45: 18.7853, 49: 40.4426, 52: 29.6139}
+  u_amp              mean=10.14  std=2.119  by_seed={42: 9.0002, 45: 12.1079, 49: 7.7319, 52: 11.7203}
+  v_min              mean=0.09756  std=0.01594  by_seed={42: 0.1013, 45: 0.0856, 49: 0.1186, 52: 0.0848}
+  lpde_floor         mean=7.976e-11  std=1.989e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=9.66e-08  std=9.015e-08  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=2294  std=531.8  by_seed={42: 2341, 45: 2400, 49: 1575, 52: 2858}
+  wall_time_s        mean=1994  std=457.2  by_seed={42: 2064.2404, 45: 2062.6535, 49: 1373.764, 52: 2476.461}
+  ms_per_window      mean=840.5  std=8.995  by_seed={42: 852.8536, 45: 831.2657, 49: 838.512, 52: 839.5565}
+  anisotropy         mean=0.0168  std=0.00772  by_seed={42: 0.0252, 45: 0.0127, 49: 0.0082, 52: 0.021}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: True, 45: True, 49: True, 52: True}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/min_rho_A/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/min_rho_A/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/min_rho_A/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/min_rho_A/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: near_onset  METHOD: autograd  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 20.477632276440275, 45: 20.477632276440275, 49: 20.477632276440275, 52: 20.477632276440275}
+  k_star_formula     {42: 20.483174547917113, 45: 20.483174547917113, 49: 20.483174547917113, 52: 20.483174547917113}
+  sigma_max          {42: 0.004133307332267577, 45: 0.004133307332267577, 49: 0.004133307332267577, 52: 0.004133307332267577}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  Ly                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  L                  {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=80.2  std=5.657  by_seed={42: 71.7157, 45: 83.0294, 49: 83.0294, 52: 83.0294}
+  spec_err_vs_kformula mean=80.21  std=5.655  by_seed={42: 71.7234, 45: 83.034, 49: 83.034, 52: 83.034}
+  u_amp              mean=77.66  std=23.06  by_seed={42: 96.2528, 45: 72.9242, 49: 94.511, 52: 46.9593}
+  v_min              mean=-0.06777  std=0.2545  by_seed={42: -0.4412, 45: 0.0808, 49: -0.0164, 52: 0.1056}
+  lpde_floor         mean=2.139e-10  std=7.923e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=73.24  std=146.4  by_seed={42: 292.869, 45: 0.0005, 49: 0.0364, 52: 0.0697}
+  n_windows          mean=941  std=322  by_seed={42: 586, 45: 1033, 49: 1339, 52: 806}
+  wall_time_s        mean=4094  std=1385  by_seed={42: 2565.3818, 45: 4500.0478, 49: 5800.888, 52: 3508.8154}
+  ms_per_window      mean=4304  std=8.558  by_seed={42: 4311.4132, 45: 4310.8216, 49: 4293.7354, 52: 4300.4088}
+  anisotropy         mean=0.1737  std=0.1339  by_seed={42: 0.0308, 45: 0.1385, 49: 0.353, 52: 0.1726}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'mixed/labyrinthine', 52: 'mixed/labyrinthine'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/nearonset_B/autograd_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/nearonset_B/autograd_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/nearonset_B/autograd_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/nearonset_B/autograd_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: near_onset  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: True  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 20.477632276440275, 45: 20.477632276440275, 49: 20.477632276440275, 52: 20.477632276440275}
+  k_star_formula     {42: 20.483174547917113, 45: 20.483174547917113, 49: 20.483174547917113, 52: 20.483174547917113}
+  sigma_max          {42: 0.004133307332267577, 45: 0.004133307332267577, 49: 0.004133307332267577, 52: 0.004133307332267577}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  Ly                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  L                  {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: True, 45: True, 49: True, 52: True}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=6.662  std=5.657  by_seed={42: 3.8335, 45: 3.8335, 49: 3.8335, 52: 15.1472}
+  spec_err_vs_kformula mean=6.687  std=5.655  by_seed={42: 3.8595, 45: 3.8595, 49: 3.8595, 52: 15.1701}
+  u_amp              mean=4.603  std=0.05914  by_seed={42: 4.6434, 45: 4.5978, 49: 4.6501, 52: 4.5216}
+  v_min              mean=0.2202  std=0.0007034  by_seed={42: 0.2207, 45: 0.2201, 49: 0.2208, 52: 0.2193}
+  lpde_floor         mean=3.648e-10  std=3.346e-11  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=8.911e-09  std=5.685e-09  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=2667  std=0  by_seed={42: 2667, 45: 2667, 49: 2667, 52: 2667}
+  wall_time_s        mean=2226  std=22.96  by_seed={42: 2241.666, 45: 2201.5229, 49: 2211.5982, 52: 2249.0003}
+  ms_per_window      mean=808  std=8.542  by_seed={42: 813.769, 45: 799.1003, 49: 802.4865, 52: 816.7193}
+  anisotropy         mean=0.009372  std=0.00633  by_seed={42: 0.0087, 45: 0.011, 49: 0.0166, 52: 0.0013}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'spots', 49: 'spots', 52: 'spots'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/nearonset_A_stab_on/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/nearonset_A_stab_on/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/nearonset_A_stab_on/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/nearonset_A_stab_on/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+REGIME: near_onset  METHOD: spectral_FFT  DOMAIN: square  STAB_REG: False  |  n=4  seeds=[42, 45, 49, 52]
+----------------------------------------------------------------------------------------------------
+Defining parameters (should be IDENTICAL across all seeds):
+  k_true             {42: 20.477632276440275, 45: 20.477632276440275, 49: 20.477632276440275, 52: 20.477632276440275}
+  k_star_formula     {42: 20.483174547917113, 45: 20.483174547917113, 49: 20.483174547917113, 52: 20.483174547917113}
+  sigma_max          {42: 0.004133307332267577, 45: 0.004133307332267577, 49: 0.004133307332267577, 52: 0.004133307332267577}
+  n_mode             {42: 5, 45: 5, 49: 5, 52: 5}
+  N_grid             {42: 64, 45: 64, 49: 64, 52: 64}
+  Lx                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  Ly                 {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  L                  {42: 1.5341581542140628, 45: 1.5341581542140628, 49: 1.5341581542140628, 52: 1.5341581542140628}
+  domain             {42: 'square', 45: 'square', 49: 'square', 52: 'square'}
+  stab_reg_used      {42: False, 45: False, 49: False, 52: False}
+
+Result fields (expected to vary by seed):
+  spec_err_vs_ktrue  mean=54.75  std=26.93  by_seed={42: 26.4609, 45: 71.7157, 49: 37.7746, 52: 83.0294}
+  spec_err_vs_kformula mean=54.76  std=26.92  by_seed={42: 26.4808, 45: 71.7234, 49: 37.7914, 52: 83.034}
+  u_amp              mean=0.0002064  std=4.467e-05  by_seed={42: 0.0002, 45: 0.0002, 49: 0.0002, 52: 0.0003}
+  v_min              mean=0.6  std=1.487e-06  by_seed={42: 0.6, 45: 0.6, 49: 0.6, 52: 0.6}
+  lpde_floor         mean=1.185e-10  std=6.387e-12  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  lpde_final         mean=3.933e-10  std=2.217e-10  by_seed={42: 0.0, 45: 0.0, 49: 0.0, 52: 0.0}
+  n_windows          mean=2667  std=0  by_seed={42: 2667, 45: 2667, 49: 2667, 52: 2667}
+  wall_time_s        mean=2220  std=9.406  by_seed={42: 2226.5704, 45: 2226.8571, 49: 2206.7747, 52: 2220.707}
+  ms_per_window      mean=806  std=3.373  by_seed={42: 808.0592, 45: 808.5153, 49: 801.152, 52: 806.2555}
+  anisotropy         mean=0.3676  std=0.402  by_seed={42: 0.1163, 45: 0.3717, 49: 0.049, 52: 0.9334}
+
+Flags / categorical fields:
+  pattern            by_seed={42: 'spots', 45: 'mixed/labyrinthine', 49: 'spots', 52: 'stripes'}
+  es_triggered       by_seed={42: False, 45: False, 49: False, 52: False}
+  collapsed          by_seed={42: False, 45: False, 49: False, 52: False}
+  ic_mode_effective  by_seed={42: 'eigenmode', 45: 'eigenmode', 49: 'eigenmode', 52: 'eigenmode'}
+
+Source files:
+  seed=42: /kaggle/working/results/nearonset_A_stab_off/spectral_FFT_d2_all_metrics_s42.json
+  seed=45: /kaggle/working/results/nearonset_A_stab_off/spectral_FFT_d2_all_metrics_s45.json
+  seed=49: /kaggle/working/results/nearonset_A_stab_off/spectral_FFT_d2_all_metrics_s49.json
+  seed=52: /kaggle/working/results/nearonset_A_stab_off/spectral_FFT_d2_all_metrics_s52.json
+
+====================================================================================================
+TOTAL: 21 distinct (regime, method, domain, stab) groups found
+====================================================================================================
