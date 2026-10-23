@@ -22,3 +22,14 @@ keywords:
   - Turing patterns
   - pseudospectral methods
   - automatic differentiation
+references:
+  - type: dataset
+    title: "Field arrays for: A Seed-Resolved Reliability Study of FFT versus Nested Automatic-Differentiation Laplacians in Windowed IMEX-PINNs for Schnakenberg Turing Patterns"
+    authors:
+      - family-names: "Ngueabou"
+        given-names: "Yolande Vanelle"
+      - family-names: "Oloniiju"
+        given-names: "Shina Daniel"
+    doi: "10.5281/zenodo.23597440"
+    year: 2026
+
