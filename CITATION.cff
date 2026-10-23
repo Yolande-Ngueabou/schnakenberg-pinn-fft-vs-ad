@@ -15,7 +15,7 @@ version: "1.0"
 date-released: "2026-10-23"   
 license: MIT
 repository-code: "https://github.com/Yolande-Ngueabou/schnakenberg-pinn-fft-vs-ad"
-doi: "10.5281/zenodo.23602120"
+doi: "10.5281/zenodo.23603120"
 keywords:
   - physics-informed neural networks
   - Schnakenberg model
