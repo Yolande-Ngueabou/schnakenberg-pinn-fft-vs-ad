@@ -21,150 +21,8 @@
 #  IDENTICAL in form to v10.py's. Running both into the SAME --save-dir
 #  WILL silently overwrite one condition's files with the other's. Always
 #  use two different --save-dir paths (e.g. results/stab_on,
-#  results/stab_off), exactly as set up two turns ago.
+#  results/stab_off).
 #
-#  v10 CHANGES FROM v9
-#  --------------------
-#  Adds the infrastructure needed for statistically meaningful ablation
-#  claims (collapse rate before/after the stabilizing regularizer, domain-
-#  shape effect on hexagon formation, etc.), which single-run results
-#  cannot support:
-#    - "A single-seed result is a point estimate with unknown uncertainty;
-#       publishing it as a finding is publishing a sample size of one."
-#      [Controlled Ablation Study: Methods & Applications, 2026]
-#    - "Variance across random seeds in deep learning experiments can be
-#       large enough to reverse the ranking of competing methods."
-#      [Dodge & Gane, cited in arXiv:2606.22308, 2026]
-#    - Standard practice across ML subfields is >=5 seeds with mean+variance
-#      reported, not a single run. [arXiv:2204.06251, "Experimental
-#      Standards for Deep Learning in NLP Research"]
-#
-#  Two changes:
-#  1. --seed CLI flag, properly threaded through IC construction, the RFF
-#     embedding, and pretraining collocation sampling. v5-v9 had a SEED
-#     module constant used only as Python default-argument values (e.g.
-#     seed=SEED in five different function signatures) -- since Python
-#     binds default arguments at FUNCTION-DEFINITION time, changing the
-#     module-level SEED after import never actually propagated anywhere.
-#     There was previously no way to run more than one seed at all.
-#  2. --force-domain-shape {square,hex_rect} CLI override, so the SAME
-#     regime (e.g. K_Hpi) can be run under both domain geometries with
-#     everything else held fixed -- the controlled A/B comparison needed
-#     to support the domain-geometry claim with more than one run.
-#
-#  Output filenames now also carry the seed (d{domain}_{label}_s{seed})
-#  so a seed sweep doesn't overwrite itself, same pattern as the v6
-#  domain-tier fix.
-#
-#  v9 CHANGES FROM v8
-#  --------------------
-#  Diagnosed from real K_Hpi runs (both eigenmode and broadband IC): the
-#  domain was ALWAYS square (Lx=Ly), which cannot exactly host the
-#  resonant wavevector triad (three wavevectors at 120 degrees, all on
-#  the critical circle |k|=k_true) that hexagonal Turing patterns form
-#  through. Stripes need only a single wavevector (any domain shape
-#  works); hexagons specifically need this triad, which requires a
-#  RECTANGULAR domain with aspect ratio L_y/L_x = 1/sqrt(3), not a
-#  square one:
-#    - Pinkney, Rucklidge & Beaume (2024): "When a pattern has only one
-#      length scale, stripe patterns are possible but three-wave
-#      interactions are responsible for the prevalence of hexagons
-#      close to onset."
-#    - pde2path tutorial (arXiv:1908.05211), Sec 2.2.2: for critical
-#      wavevectors k^(1)=(1,0), k^(2)=(-1/2,sqrt(3)/2), k^(3)=-(1/2,sqrt(3)/2)
-#      (all |k|=1, 120 degrees apart) to be simultaneously compatible
-#      with periodic BCs, the domain must be
-#      Omega=(-l1*pi,l1*pi) x (-l2*pi/sqrt(3), l2*pi/sqrt(3)).
-#    - A Faraday-wave hexagon study (arXiv:1503.04403) confirms the same
-#      ratio numerically: "the minimal size containing one hexagon" has
-#      L_y/L_x = 1/sqrt(3) = 0.5774.
-#  Given this domain shape, the commensurability derivation (worked out
-#  below in get_commensurate_rect_L) shows the triad is EXACTLY
-#  representable on the integer FFT lattice when:
-#    L_x = n_mode * (2*pi/k_true),  L_y = L_x/sqrt(3),  n_mode EVEN
-#  with the three triad modes landing at exact integer lattice indices
-#  (n_mode,0), (-n_mode/2,n_mode/2), (-n_mode/2,-n_mode/2).
-#
-#  New in this file (all opt-in per regime via regime["domain_shape"];
-#  "square" regimes are byte-for-byte identical to v8):
-#    - get_commensurate_rect_L(): builds the aspect-ratio-locked domain
-#    - make_laplacian_kernel(N, Lx, Ly): generalized to two axis lengths
-#    - IntegerRFFEmbedding: normalizes x,y by Lx,Ly separately, and can
-#      be told to FORCE-INCLUDE specific integer modes (used to
-#      guarantee the triad modes are in the RFF basis, not left to
-#      chance in the random draw)
-#    - IC_MODE "triad": seeds ONLY the three resonant wavevectors
-#      (random phase each) -- the most direct way to hand the optimizer
-#      the exact structure a hexagon needs, now that the domain can
-#      finally represent it exactly
-#    - K_Hpi's regime entry gets domain_shape="hex_rect" and
-#      ic_mode_default="triad"; every other regime is unchanged from v8
-#      (still square, still whatever IC_MODE you pass on the CLI)
-#
-#  v8 CHANGES FROM v7 (retained)
-#  --------------------
-#  IC_MODE toggle ("eigenmode" default vs "broadband") and a period-count
-#  diagnostic vs. Khudhair, Zhang & Fukawa (2022)'s fixed 8-unit domain.
-#  See v8 header (removed here for length) for the full citation list.
-#
-#  v7 CHANGES FROM v6 (retained)
-#  ------------------------------
-#  Diagnosed from a real run (K_stripes): the PINN's pattern amplitude
-#  can collapse to the trivial homogeneous fixed point (u*,v*) -- an
-#  EXACT zero-residual solution of the IMEX equations for any dt, since
-#  Lap(const)=0 and the reaction term vanishes at the steady state by
-#  definition. This is a documented PINN failure mode, not specific to
-#  this script:
-#    - Krishnapriyan et al. (NeurIPS 2021), "Characterizing possible
-#      failure modes in physics-informed neural networks": reaction-
-#      diffusion PINNs "fail to learn reaction-diffusion", collapsing
-#      "to a steady-state of uniform/constant distribution, which may
-#      be trivial to learn."
-#    - Rohrhofer, Posch, Gossnitzer & Geiger (TMLR 2023), "On the Role
-#      of Fixed Points of Dynamical Systems in Training PINNs": fixed
-#      points are always global optima of the physics loss regardless
-#      of stability, and these local optima can become BETTER (lower
-#      loss) than the true solution for long simulation times or ICs
-#      close to the fixed point -- both true of this script's windowed,
-#      long-horizon regimes with small ic_amp.
-#    - Babic, Rohrhofer & Geiger (2025), "Stabilizing PINNs: A
-#      regularization scheme for PINN training to avoid unstable fixed
-#      points": proposes a loss term that penalizes the network for
-#      sitting at a fixed point that is dynamically unstable, gated so
-#      it is only active near the fixed point and annealed off over the
-#      first fraction of training. v7's STAB_* term below is this
-#      scheme adapted from ODEs to this PDE/IMEX setting.
-#
-#  Two independent changes:
-#  1. COLLAPSE ABORT (cheap, immediate): after the known linear growth
-#     timescale 1/sigma_max has elapsed, abort a window loop early if
-#     u_amp has fallen well below ic_amp -- i.e. the field has collapsed
-#     to (u*,v*) instead of growing. This is the mirror image of the
-#     existing u_amp>100 blow-up check, which only ever caught explosion,
-#     never collapse. Saves the ~40-97% of a regime's window budget
-#     (per the earlier headroom table) that would otherwise be spent
-#     doing nothing once collapse has happened.
-#  2. FIXED-POINT STABILIZING REGULARIZER (root-cause mitigation):
-#     adds a loss term, active only while the field is close to the
-#     homogeneous state (gated by spatial variance) and only during the
-#     first STAB_GAMMA_FRAC of a regime's windows, that penalizes the
-#     network for sitting there given that this regime's own Turing
-#     diagnostics already proved sigma_max>0 (an unstable fixed point
-#     of the true PDE). This does not change any physics -- sigma_max is
-#     read from the existing get_true_k_dominant() call already used to
-#     seed the IC -- it only reshapes the loss landscape early in
-#     training to make the trivial solution less attractive, mirroring
-#     the R_LS x R_SE term in Babic et al. above.
-#
-#  v6 CHANGES FROM v5 (retained)
-#  ------------------------------
-#  Output filenames (summary PNG, *_arrays.npz, *_metrics.json) now include
-#  the --domain tier (d1/d2/d3). In v5, running --domain 1 then --domain 2
-#  into the same --save-dir silently overwrote the first run's files,
-#  since the filename only depended on the regime label. This also matters
-#  for extract_pattern.py, which reads *_arrays.npz + *_metrics.json by
-#  name -- those files must not be clobbered by a later domain-tier run if
-#  you want to keep both.
 #
 #  ABLATION STUDY — METHOD A
 #  --------------------------
@@ -181,50 +39,15 @@
 #    3. Same IMEX residual formula, same warm-start mechanism
 #    4. Same three-criterion early stopping rule and thresholds
 #
-#  COMPUTATIONAL COST COMPARISON (evidence-based)
-#  -----------------------------------------------
-#  Spectral differentiation (Method A) has cost O(N log N) per Laplacian
-#  evaluation via the FFT and is memory-efficient because it requires no
-#  storage of intermediate computational graph states.
-#  [FC-PINO, arXiv:2211.15960: "Spectral differentiation is significantly
-#   more memory-efficient than automatic differentiation. When applied to
-#   high-dimensional PDEs and deep networks, automatic differentiation
-#   must record the entire computational graph and intermediate values,
-#   often leading to prohibitive memory overhead."]
-#
-#  Automatic differentiation (Method B) for a second-order derivative
-#  at N collocation points through a network with l layers and q neurons
-#  has cost O(2^(k−1)·l·N·q²) where k=2 (second-order), i.e., O(4lNq^2)
-#  vs O(N log N) for Method A.
-#  [Sobolev cubatures paper arXiv:2211.15443: "For a PINN with l hidden
-#   layers and q neurons per layer, the complexity per epoch for computing
-#   the k-th derivative scales as O(2^(k-1)·l·N·q²) for automatic
-#   differentiation."]
-#
-#  CITATIONS (verified)
-#  --------------------
-#  Raissi, Perdikaris & Karniadakis (2019) J. Comput. Phys. 378:686–707
-#  Rahimi & Recht (2007) NeurIPS  — Random Fourier Features
-#  Tancik et al. (2020) NeurIPS   — Fourier features, spectral bias
-#  Wang, Yu & Perdikaris (2022) J. Comput. Phys. 449:110768  — NTK/PINN
-#  Trefethen (2000) SIAM  — spectral differentiation (Fourier methods)
-#  Ascher, Ruuth & Wetton (1995) SIAM J. Numer. Anal. — IMEX splitting
-#  Chen, Lai & Yang (2024) Thin-Walled Struct. 196:111423 — warm-start
-#  Loshchilov & Hutter (2017) ICLR  — SGDR cosine annealing
-#  Kingma & Ba (2015) ICLR  — Adam optimiser
-#  Glorot & Bengio (2010) AISTATS  — glorot_normal initialiser
-#  Schnakenberg (1979) J. Theor. Biol. 81:389–400
-#  Turing (1952) Phil. Trans. R. Soc. B 237:37–72
-#  Khudhair, Zhang & Fukawa (2022) Numer. Methods PDEs 38:1843–1860
 #
 #  USAGE
 #  -----
-#    python schnakenberg_v16_spectral_squarev6.py              # all 9
-#    python schnakenberg_v16_spectral_squarev6.py --regime K_stripes
-#    python schnakenberg_v16_spectral_squarev6.py --quick
-#    python schnakenberg_v16_spectral_squarev6.py --list-regimes
-#    python schnakenberg_v16_spectral_squarev6.py --no-early-stop
-#    python schnakenberg_v16_spectral_squarev6.py --save-dir ./results
+#    python schnakenberg_v16_spectral_v10_staboff.py              # all 9
+#    python schnakenberg_v16_spectral_v10_staboff.py --regime K_stripes
+#    python schnakenberg_v16_spectral_v10_staboff.py --quick
+#    python schnakenberg_v16_spectral_v10_staboff.py --list-regimes
+#    python schnakenberg_v16_spectral_v10_staboff.py --no-early-stop
+#    python schnakenberg_v16_spectral_v10_staboff.py --save-dir ./results
 # =============================================================================
 
 import os, time, argparse, warnings, json
@@ -246,22 +69,10 @@ SAVE_DIR  = "/content/drive/MyDrive/Schnakenberg_v16_METHOD_A_v9_staboff"
 _RNG      = np.random.default_rng(SEED)
 
 # =============================================================================
-#  COMMENSURATE DOMAIN FUNCTION — FIX FOR SPECTRAL ERRORS
+#  COMMENSURATE DOMAIN FUNCTION 
 # =============================================================================
-# PROBLEM (fixed here): Using a fixed L=1.0 for all regimes causes spectral
-# errors of up to 17.1% because the theoretical dominant wavenumber k* does
-# not fall on any integer Fourier mode of the L=1 lattice.
-#
-# CAUSE: On a periodic domain [0,L], the admissible wavenumbers are discrete:
-#   k_{n_x,n_y} = (2pi/L) * sqrt(n_x^2 + n_y^2),  n_x,n_y in Z
-# If k* != (2pi/L)*sqrt(n^2+m^2) for any integers n,m, patterns form at the
-# nearest available lattice point rather than at k*, causing spectral error.
-# The range of unstable wavenumbers of allowable patterns strictly depends on
-# the domain geometry and boundary conditions; to see a pattern emerging there
-# must exist at least a mode pair (n_x,n_y) such that k falls within [kmin,kmax].
-# [Avery & Scheel (2020); Brusselator WNL analysis, arXiv:1310.6571]
-#
-# FIX: Choose L = n * ell* where ell* = 2pi/k* and n = round(1.0/ell*).
+# 
+# Choose L = n * ell* where ell* = 2pi/k* and n = round(1.0/ell*).
 # This places the pure mode (n,0) exactly at k* (zero spectral error) since:
 #   k_{n,0} = (2pi/L) * n = (2pi/(n*ell*)) * n = 2pi/ell* = k*
 # The integer n is chosen to make L as close to 1.0 as possible.
@@ -281,12 +92,10 @@ def get_commensurate_L(k_star, target_L=1.0):
 
 def get_commensurate_rect_L(k_star, n_mode_target):
     """
-    v9: hex-compatible RECTANGULAR domain. Places the resonant triad
+    hex-compatible RECTANGULAR domain. Places the resonant triad
     wavevectors (k_star,0), (-k_star/2,+k_star*sqrt(3)/2),
     (-k_star/2,-k_star*sqrt(3)/2) -- 120 degrees apart, all |k|=k_star --
     EXACTLY on the integer FFT lattice.
-    [pde2path tutorial, arXiv:1908.05211, Sec 2.2.2; Faraday-wave hexagon
-    study, arXiv:1503.04403]
 
     DERIVATION: let L_x = n_mode*ell* (ell*=2*pi/k_star), L_y=L_x/sqrt(3).
     Then the three triad wavevectors land on integer lattice indices:
@@ -349,7 +158,7 @@ METHOD_LABEL = "Method A — FFT Laplacian"
 METHOD_SHORT = "spectral_FFT"
 
 # =============================================================================
-#  v7: COLLAPSE ABORT + FIXED-POINT STABILIZING REGULARIZER
+#  COLLAPSE ABORT + FIXED-POINT STABILIZING REGULARIZER
 # =============================================================================
 # COLLAPSE ABORT: fires once u_amp has fallen below COLLAPSE_AMP_FRAC*ic_amp
 # AFTER at least COLLAPSE_EFOLDS growth-timescales (1/sigma_max) have
@@ -389,7 +198,7 @@ STAB_ENABLED     = False   # v10_staboff: control condition for the collapse-
 #  v8: IC MODE + PAPER-COMPARISON DIAGNOSTIC
 # =============================================================================
 # IC_MODE:
-#   "eigenmode"  (default, v5-v7 behavior) -- all N_MODES_IC realizations at
+#   "eigenmode"  (default) -- all N_MODES_IC realizations at
 #                the single wavenumber k_true, varying only angle/phase.
 #                Deliberately anti-coarsening / pre-selects the pattern.
 #   "broadband"  -- N_MODES_BROADBAND realizations with k drawn uniformly
@@ -473,11 +282,11 @@ def get_true_k_dominant(D1, D2, gamma, a, b, n_scan=5000):
     The standard formula k* = sqrt(gamma(D_2fu+D_1gv)/(2D_1D_2)) gives the
     wavenumber that MINIMISES det A(k), which approximates argmax sigma(k) only
     when D_1 ≪ D_2.  For moderate diffusion ratios D_2/D_1 in {20,50}, the
-    approximation is 20–21% off (e.g. k*_formula=21.91, k_true=17.30 for
+    approximation is 20–31% off (e.g. k*_formula=21.91, k_true=17.30 for
     M_mixed), causing the PINN IC to seed the wrong wavenumber and leading
     to coarsening artefacts in the final pattern.
 
-    SEEDING ADVANTAGE (Remark 2 in the paper):
+    SEEDING ADVANTAGE (see in the paper):
     If the IC is seeded at k_true with amplitude A₀=ic_amp, any competing
     mode starting from numerical noise ε~10⁻⁶ requires time
       t_cross = ln(ε/A₀) / (σ_competitor − σ(k_true))
@@ -565,7 +374,7 @@ def build_eigenmode_ic(u_star, v_star, D1, D2, gamma, a, b,
 def build_broadband_ic(u_star, v_star, D1, D2, gamma, a, b,
                         k_min, k_max, ic_amp, seed=SEED):
     """
-    v8: paper-inspired broadband IC -- N_MODES_BROADBAND realizations with
+    paper-inspired broadband IC -- N_MODES_BROADBAND realizations with
     |k| drawn UNIFORMLY across the whole unstable band [k_min,k_max]
     (not fixed at k_true), random angle and phase. Unlike
     build_eigenmode_ic, the eigenvector ratio c_v = v-amplitude/u-amplitude
@@ -586,7 +395,7 @@ def build_broadband_ic(u_star, v_star, D1, D2, gamma, a, b,
 
 def build_triad_ic(u_star, v_star, D1, D2, gamma, a, b, triad_kxky, ic_amp, seed=SEED):
     """
-    v9: seeds ONLY the resonant triad wavevectors (three modes at 120
+    seeds ONLY the resonant triad wavevectors (three modes at 120
     degrees, all |k|=k_star -- see get_commensurate_rect_L), each with a
     random phase. This directly hands the optimizer the exact structure
     hexagon formation requires, rather than hoping random/broadband
@@ -669,7 +478,7 @@ def radial_spectrum(field, Lx, n_bins=80, Ly=None):
 
 def classify_field(U, Lx, k_star, Ly=None):
     """
-    v9 note: for a rectangular (Lx != Ly) domain, the kx/ky sampling
+    Note: for a rectangular (Lx != Ly) domain, the kx/ky sampling
     resolution differs by construction (2*pi/Lx vs 2*pi/Ly), so the
     aniso metric below (which compares power-weighted |kx| vs |ky|) is
     not perfectly apples-to-apples for hex_rect regimes -- treat it as a
@@ -708,10 +517,10 @@ def check_periodicity(model, Lx, label="", Ly=None):
           f"Per-y: {py:.2e} {'✓' if py<1e-4 else '✗'}")
 
 # =============================================================================
-#  MODEL BUILDER ? METHOD A (FFT LAPLACIAN)
+#  MODEL BUILDER - METHOD A (FFT LAPLACIAN)
 #
 #  The ONLY component that differs from Method B is spectral_lap().
-#  Method A computes:  Lap(u) = IFFT(?k^2?FFT(u))
+#  Method A computes:  Lap(u) = IFFT(-k^2.FFT(u))
 #  Method B computes:  Lap(u) = d^2u/dx^2 + d^2u/dy^2  via nested tapes
 # =============================================================================
 
@@ -730,7 +539,7 @@ def _build_model_and_steps(sigma_rff, D1, D2, gamma, a, b,
         [Rahimi & Recht (2007); Tancik et al. (2020)]
         Embedding: proj = matmul(x/Lx, y/Ly against B.T)  -> [N, n_ff]
 
-        v9: must_include is an explicit list of (nx,ny) integer modes that
+        must_include is an explicit list of (nx,ny) integer modes that
         are GUARANTEED to be in the basis (used for hex_rect regimes to
         ensure the resonant triad modes are always representable, rather
         than relying on them showing up in the random draw below).
@@ -798,10 +607,10 @@ def _build_model_and_steps(sigma_rff, D1, D2, gamma, a, b,
     model_prev.set_weights(model.get_weights())
     opt=tf.keras.optimizers.Adam(LR_INIT)
 
-    # ?? METHOD A: FFT SPECTRAL LAPLACIAN ?????????????????????????????????????
+    # -- METHOD A: FFT SPECTRAL LAPLACIAN ---------------------------
     # Cost: O(N^2 log N) per call. No persistent graph storage.
     # Exact for all Nyquist-resolved modes (zero truncation error at k <= k_Nyquist).
-    # [Trefethen 2000; FC-PINO arXiv:2211.15960]
+    # 
     @tf.function
     def spectral_lap(u_flat, k2):
         N=tf.shape(k2)[0]
@@ -837,7 +646,7 @@ def _build_model_and_steps(sigma_rff, D1, D2, gamma, a, b,
         Warm-start:        model_prev.set_weights(model.get_weights())
                            at each window boundary [Chen et al. 2024]
 
-        v7: adds a fixed-point stabilizing regularizer, adapted from
+        adds a fixed-point stabilizing regularizer, adapted from
         Babic, Rohrhofer & Geiger (2025) "Stabilizing PINNs" (Eq. 3-7):
           gate   = exp(-Var[u]/eps_var)      -- ~1 near the homogeneous
                                                  fixed point, ~0 once a
@@ -929,7 +738,7 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
 
     ks=diag["k_star"]; km=diag["k_min"]; kM=diag["k_max"]
     u_star=diag["u_star"]; v_star=diag["v_star"]
-    # ?? FIX: per-regime commensurate domain ??????????????????????????????
+    # -- FIX: per-regime commensurate domain -----------------------
     # L = n*ell* places mode (n,0) exactly at k* (0% spectral error).
     # FIX: use k_true = argmax sigma(k) for IC and commensurability.
     # k*_formula = argmin det A(k) can be 20% off when D2/D1 is small.
@@ -937,11 +746,11 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
     if k_true is None:
         print(f"  {label}: not Turing unstable"); return None
 
-    # v9: domain shape branches here. "square" (default) is byte-for-byte
-    # the v5-v8 construction. "hex_rect" builds the aspect-ratio-locked
+    # domain shape branches here. "square" (default) is byte-for-byte
+    # the construction. "hex_rect" builds the aspect-ratio-locked
     # rectangle (Ly=Lx/sqrt(3)) that exactly hosts the resonant triad --
     # see get_commensurate_rect_L's docstring for the derivation and the
-    # v9 header for why hexagons specifically need this (square domains
+    # header for why hexagons specifically need this (square domains
     # cannot represent 120-degree wavevector triads).
     domain_shape = force_domain_shape or regime.get("domain_shape", "square")
     triad_modes_idx = []   # integer lattice indices, empty for square
@@ -973,7 +782,7 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
         print(f"  v9: triad modes (exact, |k|=k_true for all three): {triad_modes_idx}")
     else:
         print(f"  DOMAIN: L={Lx:.5f} = {n_mode}×ℓ*  → k_{{n,0}}=k_true={k_true:.3f} (0% error)")
-    # v8: informational only -- how many pattern periods this domain spans
+    # informational only -- how many pattern periods this domain spans
     # vs. how many the paper's fixed 8-unit domain would span at the same
     # k_true. Does not affect k_true/sigma_max (both are L-independent, see
     # the dispersion-relation comparison in get_true_k_dominant's docstring)
@@ -997,7 +806,7 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
     grid_xy_np=np.column_stack([XX.ravel(),YY.ravel()]).astype(np.float32)
     grid_xy_tf=tf.constant(grid_xy_np)
 
-    # v7: eps_var scales the stabilizing regularizer's gate to this
+    # eps_var scales the stabilizing regularizer's gate to this
     # regime's own IC seeding amplitude (ic_amp), since ic_amp varies
     # ~2x across the 9 regimes (0.005 to 0.01).
     eps_var = max(float(ic_amp)**2, 1e-12)
@@ -1010,8 +819,8 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
     check_periodicity(model,Lx,"init",Ly=Ly)
 
     # IC seeded at k_true (true fastest-growing mode, not k*_formula)
-    # v8: IC_MODE selects eigenmode (default) vs broadband.
-    # v9: if the CLI is left at its default ("eigenmode") AND this regime
+    # IC_MODE selects eigenmode (default) vs broadband.
+    # if the CLI is left at its default ("eigenmode") AND this regime
     # is hex_rect, auto-upgrade to "triad" -- the domain can now host it
     # exactly, so there's no reason to seed the weaker single-k eigenmode
     # instead. Explicitly passing --ic-mode still overrides this.
@@ -1027,9 +836,9 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
     # Pretrain
     print(f"\n  Pretrain ({N_STEPS_PRETRAIN} steps)")
     opt.learning_rate.assign(float(LR_INIT))
-    # v10: locally-seeded RNG for pretraining collocation points, derived
-    # from the runtime seed (was the fixed module-level _RNG=SEED=42 in
-    # v5-v9, which never actually varied across runs -- see v10 header).
+    # locally-seeded RNG for pretraining collocation points, derived
+    # from the runtime seed (was the fixed module-level _RNG=SEED=42,
+    # which never actually varied across runs).
     _rng_local = np.random.default_rng(seed + 1)  # +1 to decorrelate from IC/RFF seed
     t0=time.time()
     for ps in range(1,N_STEPS_PRETRAIN+1):
@@ -1050,9 +859,9 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
     history=[]; t_global=0.; es_triggered=False; collapsed=False
     window_times=[]    # wall-clock time per window (seconds)
     lpde_all=[]        # L_pde at every log step (for floor calculation)
-    lstab_all=[]        # v7: stabilizing-regularizer term, for diagnostics
+    lstab_all=[]        # stabilizing-regularizer term, for diagnostics
 
-    # v7: don't judge collapse until COLLAPSE_EFOLDS growth-timescales
+    # don't judge collapse until COLLAPSE_EFOLDS growth-timescales
     # (1/sigma_max) have physically elapsed -- before that, small u_amp is
     # expected (still early linear growth), not evidence of collapse.
     collapse_check_window = max(COLLAPSE_MIN_WINDOWS,
@@ -1065,7 +874,7 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
         t_w0=time.time()
         t_end=t_global+T_WINDOW; win_lpde=[]; win_lstab=[]
 
-        # v7: anneal C_stab down over the first STAB_GAMMA_FRAC of this
+        # anneal C_stab down over the first STAB_GAMMA_FRAC of this
         # regime's window budget [Babic et al. 2025, Eq. 6], computed in
         # Python so the schedule stays visible/editable outside tf.function.
         C_stab_val = 0.0
@@ -1101,7 +910,7 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
         if u_amp>100 or not np.isfinite(u_amp) or v_min<-1.:
             print(f"  !! w{w+1}: u_amp={u_amp:.2f} — unphysical, abort"); break
 
-        # v7: COLLAPSE ABORT -- mirror image of the blow-up check above.
+        #  COLLAPSE ABORT -- mirror image of the blow-up check above.
         # Fires only after collapse_check_window (>= COLLAPSE_EFOLDS growth
         # timescales have elapsed per linear theory) if amplitude has
         # fallen well below the seeded ic_amp -- i.e. the field collapsed
@@ -1156,12 +965,12 @@ def train_regime(regime, n_steps_override=None, n_windows_override=None,
         wall_time_s=total_time,
         ms_per_window=float(np.mean(window_times)*1000),
         es_triggered=es_triggered,
-        collapsed=collapsed,                       # v7
-        stab_reg_used=STAB_ENABLED,                 # v7
-        lstab_floor=float(np.min(lstab_all)) if lstab_all else float("nan"),  # v7
-        ic_mode=IC_MODE, ic_mode_effective=effective_ic_mode,   # v8/v9
-        seed=seed, force_domain_shape=force_domain_shape,       # v10
-        domain=domain_shape, L=Lx, Lx=Lx, Ly=Ly, n_mode=n_mode,  # v9: L kept
+        collapsed=collapsed,                       
+        stab_reg_used=STAB_ENABLED,                 
+        lstab_floor=float(np.min(lstab_all)) if lstab_all else float("nan"),  
+        ic_mode=IC_MODE, ic_mode_effective=effective_ic_mode,   
+        seed=seed, force_domain_shape=force_domain_shape,       
+        domain=domain_shape, L=Lx, Lx=Lx, Ly=Ly, n_mode=n_mode,  # L kept
         N_grid=N_GRID_R,                                        # = Lx for
         N_params=model.count_params(),                          # backward compat
     )
@@ -1187,7 +996,7 @@ def plot_regime(result, domain_tier=1, seed=SEED):
     snaps_t=result["snaps_t"]; U=result["snaps_u"]; V=result["snaps_v"]
     history=result["history"]; xg=result["xg"]; yg=result["yg"]
 
-    # v9: Lx,Ly (Ly==Lx for square regimes)
+    # Lx,Ly (Ly==Lx for square regimes)
     Lx     = float(m["Lx"]); Ly = float(m["Ly"])
     n_mode = int(m["n_mode"])
     shape_label = (f"HexRect Lx={Lx:.4f}={n_mode}\u00d7\u2113* Ly={Ly:.4f} "
@@ -1315,7 +1124,6 @@ def main():
     # Tier 2: n=5, N=96  -- 2.4x cost (better resolution per period)
     # Tier 3: n=7, N=128 -- 4.7x cost (Khudhair-equivalent 7 periods)
     # Evidence: increasing n_mode at fixed N is FREE (cost depends only on N)
-    # [Cost_FFT = O(N^2 log N); Cost_autograd = O(4lNq^2), both independent of L]
     TIER_PARAMS = {
         1: dict(n_I=5, N_I=64,  n_II=5, N_II=64),   # same cost as current
         2: dict(n_I=5, N_I=64,  n_II=5, N_II=96),   # 2.4x cost for Regime II
