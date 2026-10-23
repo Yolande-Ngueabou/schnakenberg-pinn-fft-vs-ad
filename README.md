@@ -4,7 +4,7 @@ Code and results accompanying the manuscript *"A Seed-Resolved Reliability Study
 Automatic-Differentiation Laplacians in Windowed IMEX-PINNs for Schnakenberg Turing Patterns"*
 (Ngueabou and Oloniiju, submitted to the Journal of Computational Physics).
 
-Archived code and metrics: https://doi.org/10.5281/zenodo.23602120. Field arrays (separate dataset): https://doi.org/10.5281/zenodo.23597440.
+Archived code and metrics: https://doi.org/10.5281/zenodo.23603120. Field arrays (separate dataset): https://doi.org/10.5281/zenodo.23597440.
 
 The study compares two realisations of the Laplacian inside an otherwise identical windowed IMEX-PINN:
 **Method A**, a Fourier pseudospectral Laplacian of the sampled network output, and **Method B**, a nested
