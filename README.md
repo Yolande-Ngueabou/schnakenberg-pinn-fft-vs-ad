@@ -2,7 +2,7 @@
 
 Code and results accompanying the manuscript *"A Seed-Resolved Reliability Study of FFT versus Nested
 Automatic-Differentiation Laplacians in Windowed IMEX-PINNs for Schnakenberg Turing Patterns"*
-(Ngueabou and Oloniiju, submitted to the Journal of Computational Physics).
+(Ngueabou and Oloniiju, submitted to the Journal of Computers and Mathematics with Applications).
 
 Archived code and metrics: https://doi.org/10.5281/zenodo.23603120. Field arrays (separate dataset): https://doi.org/10.5281/zenodo.23597440.
 
